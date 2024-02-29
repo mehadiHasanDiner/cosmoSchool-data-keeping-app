@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa";
 import { ImSpinner9 } from "react-icons/im";
 import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+  const { loading, loggedInByGoogle } = useAuth();
+  const navigate = useNavigate();
+  console.log(navigate);
+
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
-  const loading = false;
 
   const {
     register,
@@ -26,7 +29,16 @@ const Login = () => {
     reset();
   };
 
-  const handleGoogleLogin = () => {};
+  const handleGoogleLogin = () => {
+    loggedInByGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div>
