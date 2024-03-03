@@ -19,7 +19,11 @@ const PrivateRoute = ({ children }) => {
   }
 
   // If user is logged in and tries to access the login page, redirect to another page (e.g., home page)
-  if ((user && location.pathname === "/login") || location.pathname === "/") {
+  if (user && location.pathname === "/") {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  if (user || location.pathname === "/login") {
     return <Navigate to="/dashboard" replace />;
   }
 
