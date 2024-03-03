@@ -6,11 +6,14 @@ import { FaRegEye } from "react-icons/fa";
 import { ImSpinner9 } from "react-icons/im";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const { loading, loggedInByGoogle } = useAuth();
+  const { user, loading, loggedInByGoogle } = useAuth();
   const navigate = useNavigate();
-  console.log(navigate);
+  // const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
+  console.log(user);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
@@ -32,7 +35,9 @@ const Login = () => {
   const handleGoogleLogin = () => {
     loggedInByGoogle()
       .then((result) => {
+        toast.success("user logged in successfully");
         const loggedUser = result.user;
+        navigate("/dashboard");
         console.log(loggedUser);
       })
       .catch((error) => {
@@ -95,7 +100,7 @@ const Login = () => {
             <span className="text-warning text-center"></span>
             <div className="form-control">
               <button className="btn bg-pink-800 hover:bg-black text-white capitalize text-lg">
-                {loading ? (
+                {/* {loading ? (
                   <>
                     <ImSpinner9
                       className="m-auto animate-spin"
@@ -105,7 +110,8 @@ const Login = () => {
                   </>
                 ) : (
                   "Sign in"
-                )}
+                )} */}
+                Sign in
               </button>
             </div>
 
