@@ -1,5 +1,6 @@
 import Footer from "../../Shared/Footer/Footer";
 import Navbar from "../../Shared/Navbar/Navbar";
+import { AiOutlineMenuFold } from "react-icons/ai";
 
 const Dashboard = () => {
   return (
@@ -8,18 +9,17 @@ const Dashboard = () => {
       <div className="min-h-[calc(100vh-106px)]">
         {/* <Outlet /> */}
 
-        
-
         <div className="drawer lg:drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
           <div className="drawer-content flex flex-col items-center justify-center">
             {/* Page content here */}
+
             <label
               htmlFor="my-drawer-2"
-              className="btn btn-primary drawer-button lg:hidden"
+              className="absolute z-30 -top-14 left-0 btn btn-primary drawer-button lg:hidden"
             >
-              Open drawer
+              <AiOutlineMenuFold />
             </label>
           </div>
 

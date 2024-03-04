@@ -15,15 +15,14 @@ const PrivateRoute = ({ children }) => {
 
   if (!user) {
     // If user is not logged in, redirect to the login page
-    return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 
   // If user is logged in and tries to access the login page, redirect to another page (e.g., home page)
   if (user && location.pathname === "/") {
     return <Navigate to="/dashboard" replace />;
   }
-
-  if (user || location.pathname === "/login") {
+  if (user && location.pathname === "/signup") {
     return <Navigate to="/dashboard" replace />;
   }
 

@@ -42,7 +42,7 @@ const Navbar = () => {
             className="dropdown-content z-30 card card-compact w-64 p-2 shadow bg-white"
           >
             <div className="card-body items-center text-center">
-              <img className="w-11 rounded-full " src={user.photoURL} />
+              <img className="w-11 rounded-full " src={user?.photoURL} />
               <h3 className="card-title">{user?.displayName}</h3>
               <p className="badge badge-neutral">{user?.email}</p>
               <button
