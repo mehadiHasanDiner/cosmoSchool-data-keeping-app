@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import Dashboard from "../Layout/Dashboard/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Home from "../Pages/Home/Home";
 import SignUp from "../Pages/SignUp/SignUp";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import AddItem from "../Layout/Dashboard/AddItem/AddItem";
-import AddEmployee from "../Layout/Dashboard/AddEmployee/AddEmployee";
+import AddItem from "../Pages/DashboardPages/AddItem/AddItem";
+import AddEmployee from "../Pages/DashboardPages/AddEmployee/AddEmployee";
+import Dashboard from "../Layout/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {

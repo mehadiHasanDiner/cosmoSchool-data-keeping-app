@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
-import Footer from "../../../Shared/Footer/Footer";
-import Navbar from "../../../Shared/Navbar/Navbar";
+import Footer from "../../Shared/Footer/Footer";
+import Navbar from "../../Shared/Navbar/Navbar";
 import { IoMdMenu } from "react-icons/io";
 
 const Dashboard = () => {
@@ -11,7 +11,7 @@ const Dashboard = () => {
         <div className="drawer lg:drawer-open">
           <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
-          <div className="drawer-content flex flex-col items-center justify-center">
+          <div className="drawer-content ml-4">
             {/* Page content here */}
             <Outlet />
 
