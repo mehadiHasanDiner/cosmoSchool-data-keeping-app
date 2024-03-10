@@ -1,5 +1,6 @@
 import useAuth from "../../hooks/useAuth";
 import { MdLogout } from "react-icons/md";
+import logo from "../../assets/logo.png";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -17,7 +18,9 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-300 sticky z-10">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl font-bold">Cosmo School</a>
+        <a className="pl-[68px] lg:pl-1">
+          <img className="w-4/5" src={logo} alt="" />
+        </a>
       </div>
       <div className="flex-none gap-2">
         <div className="dropdown dropdown-bottom  dropdown-end">
