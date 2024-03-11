@@ -3,9 +3,8 @@ import PrivateRoute from "./PrivateRoute";
 import Home from "../Pages/Home/Home";
 import SignUp from "../Pages/SignUp/SignUp";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
-import AddItem from "../Pages/DashboardPages/AddItem/AddItem";
-import AddEmployee from "../Pages/DashboardPages/AddEmployee/AddEmployee";
 import Dashboard from "../Layout/Dashboard/Dashboard";
+import AddSections from "../Pages/DashboardPages/AddSection/AddSections/AddSections";
 
 const router = createBrowserRouter([
   {
@@ -26,12 +25,8 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "additem",
-        element: <AddItem></AddItem>,
-      },
-      {
-        path: "addemployee",
-        element: <AddEmployee></AddEmployee>,
+        path: "addsection",
+        element: <AddSections></AddSections>,
       },
     ],
   },

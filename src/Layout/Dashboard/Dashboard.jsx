@@ -29,10 +29,10 @@ const Dashboard = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu p-4 w-56 min-h-full  bg-base-200 md:mt-16 lg:my-0 text-base-content space-y-2">
+            <ul className="menu p-4 w-56 min-h-full  bg-base-200 mt-16 lg:my-0 text-base-content space-y-2">
               {/* Sidebar content here */}
               <li>
-                <NavLink to="additem">Add Item</NavLink>
+                <NavLink to="addsection">Add Item</NavLink>
               </li>
               <li>
                 <NavLink to="addemployee">Add Employee</NavLink>
