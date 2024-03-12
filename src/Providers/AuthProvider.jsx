@@ -15,6 +15,10 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // TODO: it is need to be dynamic.
+  const mirpurBranch = "Mirpur";
+  const banasreeBranch = "Banasree";
+
   const googleProvider = new GoogleAuthProvider();
 
   const loggedInByGoogle = () => {
@@ -31,6 +35,8 @@ const AuthProvider = ({ children }) => {
     user,
     loggedInByGoogle,
     logOut,
+    mirpurBranch,
+    banasreeBranch,
   };
 
   useEffect(() => {

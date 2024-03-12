@@ -2,8 +2,19 @@ import { NavLink, Outlet } from "react-router-dom";
 import Footer from "../../Shared/Footer/Footer";
 import Navbar from "../../Shared/Navbar/Navbar";
 import { IoMdMenu } from "react-icons/io";
+import { MdDomainAdd } from "react-icons/md";
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
+import { BiSolidPurchaseTag } from "react-icons/bi";
+import { MdAssignmentAdd } from "react-icons/md";
+import { useState } from "react";
 
 const Dashboard = () => {
+  const [minusIcon1, setMinusIcon1] = useState(true);
+  // const [minusIcon2, setMinusIcon2] = useState(false);
+  const handlePurchaseIcon = () => {
+    setMinusIcon1(!minusIcon1);
+  };
+
   return (
     <div>
       <Navbar></Navbar>
@@ -32,11 +43,42 @@ const Dashboard = () => {
             <ul className="menu p-4 w-56 min-h-full  bg-base-200 mt-16 lg:my-0 text-base-content space-y-2">
               {/* Sidebar content here */}
               <li>
-                <NavLink to="addsection">Add Item</NavLink>
+                <NavLink to="addsection">
+                  <MdDomainAdd size={18} />
+                  Add Section
+                </NavLink>
               </li>
-              <li>
-                <NavLink to="addemployee">Add Employee</NavLink>
-              </li>
+
+              <details className="collapse bg-base-200">
+                <summary className="collapse-title  font-medium p-0 min-h-0">
+                  <div className="flex justify-between my-1 items-center">
+                    <div className="pl-3">
+                      <div className="flex items-center">
+                        <span className="mr-1">
+                          <BiSolidPurchaseTag size={18} />
+                        </span>
+                        <span onClick={handlePurchaseIcon}>Purchase</span>
+                      </div>{" "}
+                    </div>
+                    <span className="">
+                      {minusIcon1 ? (
+                        <AiOutlinePlusCircle size={20} />
+                      ) : (
+                        <AiOutlineMinusCircle size={20} />
+                      )}
+                    </span>
+                  </div>
+                </summary>
+
+                <div className="collapse-content px-0 ml-4 ">
+                  <li>
+                    <NavLink to="addpurchase">
+                      <MdAssignmentAdd size={18} />
+                      Add Purchase
+                    </NavLink>
+                  </li>
+                </div>
+              </details>
             </ul>
           </div>
         </div>

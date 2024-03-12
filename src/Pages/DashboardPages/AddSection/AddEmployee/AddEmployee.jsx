@@ -67,9 +67,9 @@ const AddEmployee = () => {
                 <option value="Select" disabled>
                   Select one
                 </option>
-                <option value="Cleaning Item">Admin</option>
-                <option value="Stationary Item">Teacher</option>
-                <option value="ELectric Item">Management</option>
+                <option value="Admin">Admin</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Management">Management</option>
               </select>
             </div>
           </div>
