@@ -1,13 +1,40 @@
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const AddEmployee = () => {
   const {
     register,
     handleSubmit,
+    reset,
     // formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    fetch(`${import.meta.env.VITE_URL_KEY}/addEmployee`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            // iconColor: "green",
+            title: "Employee has been added successfully",
+            showConfirmButton: false,
+            timer: 2000,
+            background: "white",
+            color: "black",
+          });
+        }
+        reset();
+      });
+  };
+
   return (
     <div className="bg-gradient-to-b from-gray-300 to-gray-200 rounded-lg p-2 my-6 mr-3">
       <h2 className="font-bold text-2xl my-4 text-center">
