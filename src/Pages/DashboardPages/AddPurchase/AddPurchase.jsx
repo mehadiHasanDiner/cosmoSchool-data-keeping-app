@@ -1,11 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
+import PurchaseRow from "./PurchaseRow";
 
 const AddPurchase = () => {
   const { mirpurBranch } = useAuth();
 
-  const {} = useQuery({
+  const { refetch, data: items = [] } = useQuery({
     queryKey: ["addItem", mirpurBranch],
+    queryFn: async () => {
+      const res = await fetch(
+        `${import.meta.env.VITE_URL_KEY}/addItem/${mirpurBranch}`
+      );
+      return res.json();
+    },
   });
 
   return (
@@ -14,34 +21,20 @@ const AddPurchase = () => {
         {/* head */}
         <thead>
           <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
+            <th>SL</th>
+            <th>Item Name</th>
+            <th>Item Category</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
-          </tr>
-          {/* row 2 */}
-          <tr>
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
-          </tr>
-          {/* row 3 */}
-          <tr>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-          </tr>
+          {items.map((item, index) => (
+            <PurchaseRow
+              key={item?._id}
+              item={item}
+              index={index}
+            ></PurchaseRow>
+          ))}
         </tbody>
       </table>
     </div>
