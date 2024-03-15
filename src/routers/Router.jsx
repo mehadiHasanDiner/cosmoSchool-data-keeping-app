@@ -7,6 +7,7 @@ import Dashboard from "../Layout/Dashboard/Dashboard";
 import AddSections from "../Pages/DashboardPages/AddSection/AddSections/AddSections";
 import AddPurchase from "../Pages/DashboardPages/AddPurchase/AddPurchase";
 import AddPurchaseDetails from "../Pages/DashboardPages/AddPurchaseDetails/AddPurchaseDetails";
+import PurchaseList from "../Pages/DashboardPages/PurchaseList/PurchaseList";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
         element: <AddPurchaseDetails></AddPurchaseDetails>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_URL_KEY}/addpurchase/${params.id}`),
+      },
+      {
+        path: "purchaselist",
+        element: <PurchaseList></PurchaseList>,
       },
     ],
   },

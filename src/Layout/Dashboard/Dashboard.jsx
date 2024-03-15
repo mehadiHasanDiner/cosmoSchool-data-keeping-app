@@ -6,6 +6,8 @@ import { MdDomainAdd } from "react-icons/md";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { BiSolidPurchaseTag } from "react-icons/bi";
 import { MdAssignmentAdd } from "react-icons/md";
+import { MdOutlineListAlt } from "react-icons/md";
+
 import { useState } from "react";
 
 const Dashboard = () => {
@@ -75,6 +77,12 @@ const Dashboard = () => {
                     <NavLink to="addpurchase">
                       <MdAssignmentAdd size={18} />
                       Add Purchase
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="purchaselist">
+                      <MdOutlineListAlt size={18} />
+                      Purchase List
                     </NavLink>
                   </li>
                 </div>
