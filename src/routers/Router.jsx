@@ -8,6 +8,7 @@ import AddSections from "../Pages/DashboardPages/AddSection/AddSections/AddSecti
 import AddPurchase from "../Pages/DashboardPages/AddPurchase/AddPurchase";
 import AddPurchaseDetails from "../Pages/DashboardPages/AddPurchaseDetails/AddPurchaseDetails";
 import PurchaseList from "../Pages/DashboardPages/PurchaseList/PurchaseList";
+import Store from "../Pages/DashboardPages/Store/Store";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "purchaselist",
         element: <PurchaseList></PurchaseList>,
+      },
+      {
+        path: "store",
+        element: <Store></Store>,
       },
     ],
   },

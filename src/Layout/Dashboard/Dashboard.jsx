@@ -51,7 +51,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
 
-              <details className="collapse bg-base-200">
+              <details className="collapse bg-base-200 ">
                 <summary className="collapse-title  font-medium p-0 min-h-0">
                   <div className="flex justify-between my-1 items-center">
                     <div className="pl-3">
@@ -72,7 +72,7 @@ const Dashboard = () => {
                   </div>
                 </summary>
 
-                <div className="collapse-content px-0 ml-4 ">
+                <div className="collapse-content px-0 ml-4 -mb-4">
                   <li>
                     <NavLink to="addpurchase">
                       <MdAssignmentAdd size={18} />
@@ -87,6 +87,13 @@ const Dashboard = () => {
                   </li>
                 </div>
               </details>
+
+              <li>
+                <NavLink to="store">
+                  <MdDomainAdd size={18} />
+                  Store Balance
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
