@@ -47,7 +47,7 @@ const AddEmployee = () => {
               <span className="label-text mr-2">Employee Name:</span>
             </label>
             <input
-              {...register("itemName")}
+              {...register("employeeName")}
               type="text"
               placeholder="Item Name"
               className="input input-bordered label-text w-full"
@@ -62,13 +62,15 @@ const AddEmployee = () => {
               <select
                 defaultValue={"Select"}
                 className="select select-bordered w-full"
-                {...register("itemCategory")}
+                {...register("designation")}
               >
                 <option value="Select" disabled>
                   Select one
                 </option>
                 <option value="Admin">Admin</option>
                 <option value="Teacher">Teacher</option>
+                <option value="Principal">Principal</option>
+                <option value="Vice Principal">Vice Principal</option>
                 <option value="Management">Management</option>
               </select>
             </div>

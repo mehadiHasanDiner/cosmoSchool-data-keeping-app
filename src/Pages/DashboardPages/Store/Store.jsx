@@ -31,7 +31,7 @@ const Store = () => {
               <th>SL</th>
               <th>Item Name</th>
               <th>Category</th>
-              <th>Price</th>
+              {/* <th>Price</th> */}
               <th>Present Quantity</th>
               <th>Last Purchase Date</th>
             </tr>
@@ -42,7 +42,7 @@ const Store = () => {
                 <th>{index + 1}</th>
                 <td>{item?.itemName}</td>
                 <td>{item?.itemCategory}</td>
-                <td>Tk.{item?.itemPrice}</td>
+                {/* <td>Tk.{item?.itemPrice}</td> */}
                 <td>{item?.itemQuantity}</td>
                 <td>
                   {moment(item?.purchaseDate, "YYYY-MM-DD").format(

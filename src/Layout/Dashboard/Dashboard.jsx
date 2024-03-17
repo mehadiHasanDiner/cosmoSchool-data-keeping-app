@@ -7,14 +7,19 @@ import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 import { BiSolidPurchaseTag } from "react-icons/bi";
 import { MdAssignmentAdd } from "react-icons/md";
 import { MdOutlineListAlt } from "react-icons/md";
+import { FaShop } from "react-icons/fa6";
+import { FaBalanceScale } from "react-icons/fa";
 
 import { useState } from "react";
 
 const Dashboard = () => {
   const [minusIcon1, setMinusIcon1] = useState(true);
-  // const [minusIcon2, setMinusIcon2] = useState(false);
+  const [minusIcon2, setMinusIcon2] = useState(true);
   const handlePurchaseIcon = () => {
     setMinusIcon1(!minusIcon1);
+  };
+  const handleExpenseIcon = () => {
+    setMinusIcon2(!minusIcon2);
   };
 
   return (
@@ -88,9 +93,46 @@ const Dashboard = () => {
                 </div>
               </details>
 
+              <details className="collapse bg-base-200 ">
+                <summary className="collapse-title  font-medium p-0 min-h-0">
+                  <div className="flex justify-between my-1 items-center">
+                    <div className="pl-3">
+                      <div className="flex items-center">
+                        <span className="mr-1">
+                          <FaShop size={18} />
+                        </span>
+                        <span onClick={handleExpenseIcon}>Expense</span>
+                      </div>{" "}
+                    </div>
+                    <span className="">
+                      {minusIcon2 ? (
+                        <AiOutlinePlusCircle size={20} />
+                      ) : (
+                        <AiOutlineMinusCircle size={20} />
+                      )}
+                    </span>
+                  </div>
+                </summary>
+
+                <div className="collapse-content px-0 ml-4 -mb-4">
+                  <li>
+                    <NavLink to="addAllExpense">
+                      <MdAssignmentAdd size={18} />
+                      Add All Expense
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="expenseHistory">
+                      <MdOutlineListAlt size={18} />
+                      Expense History
+                    </NavLink>
+                  </li>
+                </div>
+              </details>
+
               <li>
                 <NavLink to="store">
-                  <MdDomainAdd size={18} />
+                  <FaBalanceScale size={18} />
                   Store Balance
                 </NavLink>
               </li>

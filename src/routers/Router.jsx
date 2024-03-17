@@ -9,6 +9,9 @@ import AddPurchase from "../Pages/DashboardPages/AddPurchase/AddPurchase";
 import AddPurchaseDetails from "../Pages/DashboardPages/AddPurchaseDetails/AddPurchaseDetails";
 import PurchaseList from "../Pages/DashboardPages/PurchaseList/PurchaseList";
 import Store from "../Pages/DashboardPages/Store/Store";
+import AddAllExpense from "../Pages/DashboardPages/AddAllExpense/AddAllExpense";
+import ExpenseHistory from "../Pages/DashboardPages/ExpenseHistory/ExpenseHistory";
+import AddAllExpenseDetails from "../Pages/DashboardPages/AddAllExpenseDetails/AddAllExpenseDetails";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +48,24 @@ const router = createBrowserRouter([
       {
         path: "purchaselist",
         element: <PurchaseList></PurchaseList>,
+      },
+      {
+        path: "addAllExpense",
+        element: <AddAllExpense></AddAllExpense>,
+      },
+      {
+        path: "addAllExpense/:id",
+        element: <AddAllExpenseDetails></AddAllExpenseDetails>,
+        loader: ({ params }) =>
+          fetch(
+            `${import.meta.env.VITE_URL_KEY}/employeeExpenseDetails/${
+              params.id
+            }`
+          ),
+      },
+      {
+        path: "expenseHistory",
+        element: <ExpenseHistory></ExpenseHistory>,
       },
       {
         path: "store",
