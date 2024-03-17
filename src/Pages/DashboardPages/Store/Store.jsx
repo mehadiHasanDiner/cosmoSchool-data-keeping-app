@@ -1,21 +1,9 @@
-import { useEffect, useState } from "react";
-import useAuth from "../../../hooks/useAuth";
 import moment from "moment";
+import useStore from "../../../hooks/useStore";
 
 const Store = () => {
-  const { mirpurBranch } = useAuth();
-  const [storeItems, setStoreItems] = useState([]);
-
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_URL_KEY}/store/${mirpurBranch}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setStoreItems(data);
-        console.log(data);
-      });
-  }, [mirpurBranch]);
-
-  //   const formattedDate = moment(purchaseDate, "YYYY-MM-DD").format("DD-MM-YYYY");
+  const [, storeItems] = useStore();
+  console.log(storeItems);
 
   return (
     <div>

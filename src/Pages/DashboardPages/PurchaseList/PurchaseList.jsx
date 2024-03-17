@@ -19,6 +19,16 @@ const PurchaseList = () => {
 
   const handleSearch = () => {};
 
+  const calculateTotalPrice = (item) => {
+    return item.map((itemsArray) => {
+      const totalPrice = itemsArray.itemPrice * itemsArray.itemQuantity;
+      return { ...itemsArray, totalPrice };
+    });
+  };
+
+  const itemsWithTotalPrice = calculateTotalPrice(purchaseItems);
+  // console.log(itemsWithTotalPrice);
+
   return (
     <div>
       <p className="text-center font-bold text-xl my-3">
@@ -48,13 +58,14 @@ const PurchaseList = () => {
               <th>Category</th>
               <th>Price</th>
               <th>Quantity</th>
+              <th>Total Price</th>
               <th>Voucher No.</th>
               <th>Remarks</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
-            {purchaseItems.map((item, index) => (
+            {itemsWithTotalPrice.map((item, index) => (
               <PurchaseListRow
                 key={item?._id}
                 item={item}

@@ -9,6 +9,7 @@ const PurchaseListRow = ({ item, index }) => {
     itemQuantity,
     voucherNo,
     remarks,
+    totalPrice,
   } = item || {};
 
   const formattedDate = moment(purchaseDate, "YYYY-MM-DD").format("DD-MM-YYYY");
@@ -21,6 +22,7 @@ const PurchaseListRow = ({ item, index }) => {
       <td>{itemCategory}</td>
       <td>Tk.{itemPrice}</td>
       <td>{itemQuantity}</td>
+      <td>{totalPrice}</td>
       <td>{voucherNo}</td>
       <td>{remarks}</td>
     </tr>
