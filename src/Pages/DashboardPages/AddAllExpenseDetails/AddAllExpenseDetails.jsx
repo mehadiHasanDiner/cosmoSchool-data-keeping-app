@@ -1,14 +1,19 @@
+import "./AddAllExpenseDetails.css";
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import useStore from "../../../hooks/useStore";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const AddAllExpenseDetails = () => {
   const employeeExpenseDetails = useLoaderData();
-  const [, storeItems] = useStore();
-  // console.log(storeItems);
+  const [refetch, storeItems] = useStore();
+  const [selectedItems, setSelectedItems] = useState({});
 
   // const itemNames = storeItems.map((obj) => obj.itemName);
   // console.log(itemNames);
+  const location = useLocation();
+  console.log(location?.pathname);
 
   const {
     register,
@@ -18,9 +23,70 @@ const AddAllExpenseDetails = () => {
     formState: { errors },
   } = useForm();
 
-  // console.log(employeeExpenseDetails);
-  const onSubmit = (data) => {
-    console.log(data);
+  const handleItemClick = (itemId, quantity) => {
+    setSelectedItems((prevState) => ({
+      ...prevState,
+      [itemId]: (prevState[itemId] || 0) + quantity,
+    }));
+  };
+  // console.log(selectedItems);
+  // console.log(Object.entries(selectedItems));
+
+  const onSubmit = async (data) => {
+    // const employeeData = {
+
+    // };
+    try {
+      const promises = Object.entries(selectedItems).map(
+        ([itemId, quantity]) => {
+          return fetch(
+            `${import.meta.env.VITE_URL_KEY}/takeFromStore/${itemId}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ quantity }),
+            }
+          );
+        }
+      );
+      await Promise.all(promises);
+      refetch();
+
+      // Store employee expenses
+      const employeeExpensesData = {
+        employeeName: data.employeeName,
+        givenDate: data.givenDate,
+        designation: data.designation,
+        branchName: data.branchName,
+        ...selectedItems,
+      };
+
+      await fetch(`${import.meta.env.VITE_URL_KEY}/employeeExpense`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(employeeExpensesData),
+      });
+
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        iconColor: "crimson",
+        title: "Items have been delivered successfully!",
+        showConfirmButton: false,
+        timer: 1500,
+        background: "purple",
+        color: "white",
+      });
+      reset();
+      // Reset selected items
+      setSelectedItems({});
+    } catch (error) {
+      console.error("Error delivering items:", error);
+    }
   };
 
   return (
@@ -67,71 +133,49 @@ const AddAllExpenseDetails = () => {
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Purchase Date</span>
+              <span className="label-text">Item Delivery Date</span>
             </label>
             <input
               type="date"
-              {...register("purchaseDate", { required: true })}
+              {...register("givenDate", { required: true })}
               className="input input-bordered"
             />
             {errors.purchaseDate && (
               <span className="text-red-600 mt-1">This field is required</span>
             )}
           </div>
-
-          {storeItems.map((item, index) => (
-            <div className="grid" key={index}>
-              <label className="label">
-                <span className="label-text">{item?.itemName}</span>
-              </label>
-              <input
-                type="number"
-                defaultValue={item?.itemQuantity}
-                {...register("itemQuantity", { required: true })}
-                placeholder="quantity"
-                className="input input-bordered"
-              />
-              {errors.itemQuantity && (
-                <span className="text-red-600 mt-1">
-                  This field is required
+        </div>
+        <div className=" bg-gradient-to-t from-base-200 to-neutral-300 p-4 rounded-lg ">
+          <ul className="space-y-2">
+            {storeItems.map((item) => (
+              <li className=" flex items-center" key={item._id}>
+                <span className="font-bold w-1/4">
+                  {item.itemName} - {item.itemQuantity}:{" "}
                 </span>
-              )}
-            </div>
-          ))}
-
-          {/* <div className="form-control">
-            <label className="label">
-              <span className="label-text">Item quantity</span>
-            </label>
-            <input
-              type="number"
-              step="any"
-              {...register("itemQuantity", { required: true })}
-              placeholder="quantity"
-              className="input input-bordered"
-            />
-            {errors.itemQuantity && (
-              <span className="text-red-600 mt-1">This field is required</span>
-            )}
-          </div>
-
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Remarks</span>
-            </label>
-            <input
-              type="text"
-              {...register("remarks")}
-              placeholder="remarks"
-              className="input input-bordered"
-            />
-          </div>
-           */}
+                <input
+                  className="ml-3 w-full input input-bordered no-spinners"
+                  type="number"
+                  placeholder="enter quantity to give"
+                  onChange={(e) =>
+                    handleItemClick(item._id, parseInt(e.target.value))
+                  }
+                />
+              </li>
+            ))}
+          </ul>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-outline bg-pink-700 hover:bg-pink-500 text-white text-lg font-bold">
-            Submit Details
-          </button>
+          {location.pathname ===
+          `/dashboard/addAllExpense/$
+          {employeeExpenseDetails?._id}` ? (
+            <button className="btn btn-outline bg-pink-700 hover:bg-pink-500 text-white text-lg font-bold">
+              Item Returned
+            </button>
+          ) : (
+            <button className="btn btn-outline bg-green-700 hover:bg-pink-500 text-white text-lg font-bold">
+              Item Delivered
+            </button>
+          )}
         </div>
       </form>
     </div>

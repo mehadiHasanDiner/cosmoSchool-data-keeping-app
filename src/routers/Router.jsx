@@ -64,6 +64,16 @@ const router = createBrowserRouter([
           ),
       },
       {
+        path: "addAllExpense/backItem/:id",
+        element: <AddAllExpenseDetails></AddAllExpenseDetails>,
+        loader: ({ params }) =>
+          fetch(
+            `${import.meta.env.VITE_URL_KEY}/employeeExpenseDetails/${
+              params.id
+            }`
+          ),
+      },
+      {
         path: "expenseHistory",
         element: <ExpenseHistory></ExpenseHistory>,
       },

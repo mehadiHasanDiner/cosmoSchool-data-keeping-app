@@ -16,6 +16,11 @@ const AllExpenseRow = ({ expense, index }) => {
             Give Item
           </button>
         </Link>
+        <Link to={`backItem/${_id}`}>
+          <button className="btn btn-sm btn-outline btn-neutral">
+            Back Item
+          </button>
+        </Link>
       </td>
     </tr>
   );
