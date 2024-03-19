@@ -33,9 +33,6 @@ const AddAllExpenseDetails = () => {
   // console.log(Object.entries(selectedItems));
 
   const onSubmit = async (data) => {
-    // const employeeData = {
-
-    // };
     try {
       const promises = Object.entries(selectedItems).map(
         ([itemId, quantity]) => {
@@ -166,8 +163,7 @@ const AddAllExpenseDetails = () => {
         </div>
         <div className="form-control mt-6">
           {location.pathname ===
-          `/dashboard/addAllExpense/$
-          {employeeExpenseDetails?._id}` ? (
+          `/dashboard/addAllExpense/backItem/${employeeExpenseDetails?._id}` ? (
             <button className="btn btn-outline bg-pink-700 hover:bg-pink-500 text-white text-lg font-bold">
               Item Returned
             </button>
