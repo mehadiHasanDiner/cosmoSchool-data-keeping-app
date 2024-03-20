@@ -9,11 +9,11 @@ const AddAllExpenseDetails = () => {
   const employeeExpenseDetails = useLoaderData();
   const [refetch, storeItems] = useStore();
   const [selectedItems, setSelectedItems] = useState({});
+  const [actionType, setActionType] = useState("");
 
   // const itemNames = storeItems.map((obj) => obj.itemName);
   // console.log(itemNames);
   const location = useLocation();
-  console.log(location?.pathname);
 
   const {
     register,
@@ -32,20 +32,24 @@ const AddAllExpenseDetails = () => {
   // console.log(selectedItems);
   // console.log(Object.entries(selectedItems));
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, actionType) => {
     try {
+      let endpoint;
+      if (actionType === "takeFromStore") {
+        endpoint = `${import.meta.env.VITE_URL_KEY}/takeFromStore`;
+      } else if (actionType === "giveToStore") {
+        endpoint = `${import.meta.env.VITE_URL_KEY}/employeeReturned`;
+      }
+
       const promises = Object.entries(selectedItems).map(
         ([itemId, quantity]) => {
-          return fetch(
-            `${import.meta.env.VITE_URL_KEY}/takeFromStore/${itemId}`,
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ quantity }),
-            }
-          );
+          return fetch(`${endpoint}/${itemId}`, {
+            method: "POST", // Change the method to POST
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ quantity }),
+          });
         }
       );
       await Promise.all(promises);
@@ -161,17 +165,29 @@ const AddAllExpenseDetails = () => {
             ))}
           </ul>
         </div>
+
+        <input type="hidden" {...register("actionType")} value={actionType} />
+
         <div className="form-control mt-6">
           {location.pathname ===
           `/dashboard/addAllExpense/backItem/${employeeExpenseDetails?._id}` ? (
-            <button className="btn btn-outline bg-pink-700 hover:bg-pink-500 text-white text-lg font-bold">
+            <button
+              type="button"
+              onClick={() => setActionType("giveToStore")}
+              className="btn btn-outline bg-pink-700 hover:bg-pink-500 text-white text-lg font-bold"
+            >
               Item Returned
             </button>
           ) : (
-            <button className="btn btn-outline bg-green-700 hover:bg-pink-500 text-white text-lg font-bold">
+            <button
+              type="button"
+              onClick={() => setActionType("takeFromStore")}
+              className="btn btn-outline bg-green-700 hover:bg-pink-500 text-white text-lg font-bold"
+            >
               Item Delivered
             </button>
           )}
+          <button type="submit">Submit</button>
         </div>
       </form>
     </div>
