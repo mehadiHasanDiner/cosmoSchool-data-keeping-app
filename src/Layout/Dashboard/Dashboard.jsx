@@ -127,6 +127,12 @@ const Dashboard = () => {
                       Expense History
                     </NavLink>
                   </li>
+                  <li>
+                    <NavLink to="productReturn">
+                      <MdOutlineListAlt size={18} />
+                      Product Return
+                    </NavLink>
+                  </li>
                 </div>
               </details>
 

@@ -71,7 +71,7 @@ const AddAllExpenseDetails = () => {
       };
 
       if (actionType === "giveToStore") {
-        await fetch(`${import.meta.env.VITE_URL_KEY}/employeeBack`, {
+        await fetch(`${import.meta.env.VITE_URL_KEY}/employeeReturned`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

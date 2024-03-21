@@ -12,6 +12,7 @@ import Store from "../Pages/DashboardPages/Store/Store";
 import AddAllExpense from "../Pages/DashboardPages/AddAllExpense/AddAllExpense";
 import ExpenseHistory from "../Pages/DashboardPages/ExpenseHistory/ExpenseHistory";
 import AddAllExpenseDetails from "../Pages/DashboardPages/AddAllExpenseDetails/AddAllExpenseDetails";
+import ProductReturn from "../Pages/DashboardPages/ProductReturn/ProductReturn";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "expenseHistory",
         element: <ExpenseHistory></ExpenseHistory>,
+      },
+      {
+        path: "productReturn",
+        element: <ProductReturn></ProductReturn>,
       },
       {
         path: "store",

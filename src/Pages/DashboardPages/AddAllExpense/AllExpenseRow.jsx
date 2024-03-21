@@ -18,7 +18,7 @@ const AllExpenseRow = ({ expense, index }) => {
         </Link>
         <Link to={`backItem/${_id}`}>
           <button className="btn btn-sm btn-outline btn-neutral">
-            Back Item
+            Item Return
           </button>
         </Link>
       </td>
