@@ -33,18 +33,24 @@ const AddAllExpenseDetails = () => {
   // console.log(Object.entries(selectedItems));
 
   const onSubmit = async (data, actionType) => {
+    // console.log(actionType);
     try {
+      if (!actionType) {
+        console.error("Action type is not set.");
+        return;
+      }
+
       let endpoint;
       if (actionType === "takeFromStore") {
         endpoint = `${import.meta.env.VITE_URL_KEY}/takeFromStore`;
       } else if (actionType === "giveToStore") {
-        endpoint = `${import.meta.env.VITE_URL_KEY}/employeeReturned`;
+        endpoint = `${import.meta.env.VITE_URL_KEY}/giveToStore`;
       }
 
       const promises = Object.entries(selectedItems).map(
         ([itemId, quantity]) => {
           return fetch(`${endpoint}/${itemId}`, {
-            method: "POST", // Change the method to POST
+            method: "PUT", // Change the method to POST
             headers: {
               "Content-Type": "application/json",
             },
@@ -64,27 +70,38 @@ const AddAllExpenseDetails = () => {
         ...selectedItems,
       };
 
-      await fetch(`${import.meta.env.VITE_URL_KEY}/employeeExpense`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(employeeExpensesData),
-      });
+      if (actionType === "giveToStore") {
+        await fetch(`${import.meta.env.VITE_URL_KEY}/employeeBack`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(employeeExpensesData),
+        });
+      } else {
+        await fetch(`${import.meta.env.VITE_URL_KEY}/employeeExpense`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(employeeExpensesData),
+        });
+      }
+
+      reset();
+      // Reset selected items
+      setSelectedItems({});
 
       Swal.fire({
         position: "center",
         icon: "success",
         iconColor: "crimson",
-        title: "Items have been delivered successfully!",
+        title: "Data inserted successfully",
         showConfirmButton: false,
         timer: 1500,
         background: "purple",
         color: "white",
       });
-      reset();
-      // Reset selected items
-      setSelectedItems({});
     } catch (error) {
       console.error("Error delivering items:", error);
     }
@@ -92,7 +109,10 @@ const AddAllExpenseDetails = () => {
 
   return (
     <div className="card w-full max-w-2xl mx-auto shadow-2xl bg-base-100 mb-12">
-      <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+      <form
+        onSubmit={handleSubmit((data) => onSubmit(data, actionType))}
+        className="card-body"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="form-control">
             <label className="label">
@@ -156,7 +176,7 @@ const AddAllExpenseDetails = () => {
                 <input
                   className="ml-3 w-full input input-bordered no-spinners"
                   type="number"
-                  placeholder="enter quantity to give"
+                  placeholder="enter quantity want to give"
                   onChange={(e) =>
                     handleItemClick(item._id, parseInt(e.target.value))
                   }
@@ -169,25 +189,23 @@ const AddAllExpenseDetails = () => {
         <input type="hidden" {...register("actionType")} value={actionType} />
 
         <div className="form-control mt-6">
-          {location.pathname ===
-          `/dashboard/addAllExpense/backItem/${employeeExpenseDetails?._id}` ? (
-            <button
-              type="button"
-              onClick={() => setActionType("giveToStore")}
-              className="btn btn-outline bg-pink-700 hover:bg-pink-500 text-white text-lg font-bold"
-            >
-              Item Returned
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => setActionType("takeFromStore")}
-              className="btn btn-outline bg-green-700 hover:bg-pink-500 text-white text-lg font-bold"
-            >
-              Item Delivered
-            </button>
-          )}
-          <button type="submit">Submit</button>
+          <button
+            type="submit"
+            onClick={() =>
+              setActionType(
+                location.pathname ===
+                  `/dashboard/addAllExpense/backItem/${employeeExpenseDetails?._id}`
+                  ? "giveToStore"
+                  : "takeFromStore"
+              )
+            }
+            className="btn btn-outline bg-green-700 hover:bg-purple-700 text-white text-lg font-bold"
+          >
+            {location.pathname ===
+            `/dashboard/addAllExpense/backItem/${employeeExpenseDetails?._id}`
+              ? "Item Returned"
+              : "Item Delivered"}
+          </button>
         </div>
       </form>
     </div>
