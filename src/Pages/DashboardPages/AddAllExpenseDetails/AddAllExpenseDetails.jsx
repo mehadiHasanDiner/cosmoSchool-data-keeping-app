@@ -23,13 +23,16 @@ const AddAllExpenseDetails = () => {
     formState: { errors },
   } = useForm();
 
-  const handleItemClick = (itemId, quantity) => {
+  const handleItemClick = (itemId, itemName, quantity) => {
     setSelectedItems((prevState) => ({
       ...prevState,
-      [itemId]: (prevState[itemId] || 0) + quantity,
+      [itemId]: {
+        itemName: itemName,
+        itemId: (prevState[itemId]?.quantity || 0) + quantity,
+      },
     }));
   };
-  // console.log(selectedItems);
+  console.log(selectedItems);
   // console.log(Object.entries(selectedItems));
 
   const onSubmit = async (data, actionType) => {
@@ -174,11 +177,21 @@ const AddAllExpenseDetails = () => {
                   {item.itemName} - {item.itemQuantity}:{" "}
                 </span>
                 <input
-                  className="ml-3 w-full input input-bordered no-spinners"
+                  className="ml-3 w-1/4 input input-bordered no-spinners"
+                  type="text"
+                  value={item.itemName}
+                  readOnly
+                />
+                <input
+                  className="ml-3 w-1/4 input input-bordered no-spinners"
                   type="number"
-                  placeholder="enter quantity want to give"
+                  placeholder="Quantity"
                   onChange={(e) =>
-                    handleItemClick(item._id, parseInt(e.target.value))
+                    handleItemClick(
+                      item._id,
+                      item.itemName,
+                      parseInt(e.target.value)
+                    )
                   }
                 />
               </li>
