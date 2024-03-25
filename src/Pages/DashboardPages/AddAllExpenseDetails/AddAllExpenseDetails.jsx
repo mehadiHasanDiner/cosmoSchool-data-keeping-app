@@ -28,11 +28,11 @@ const AddAllExpenseDetails = () => {
       ...prevState,
       [itemId]: {
         itemName: itemName,
-        itemId: (prevState[itemId]?.quantity || 0) + quantity,
+        quantity: (prevState[itemId]?.quantity || 0) + quantity,
       },
     }));
   };
-  console.log(selectedItems);
+  // console.log(selectedItems);
   // console.log(Object.entries(selectedItems));
 
   const onSubmit = async (data, actionType) => {
@@ -51,13 +51,13 @@ const AddAllExpenseDetails = () => {
       }
 
       const promises = Object.entries(selectedItems).map(
-        ([itemId, quantity]) => {
+        ([itemId, itemData]) => {
           return fetch(`${endpoint}/${itemId}`, {
             method: "PUT", // Change the method to POST
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ quantity }),
+            body: JSON.stringify({ quantity: itemData.quantity }),
           });
         }
       );
