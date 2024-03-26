@@ -50,7 +50,9 @@ const ExpenseHistory = () => {
 
   return (
     <div className="mt-4 mr-3">
-      <h2 className="text-center font-bold text-xl mb-3">Employee Expense History</h2>
+      <h2 className="text-center font-bold text-xl mb-3">
+        Employee Expense History
+      </h2>
       <table className="border-collapse w-full">
         <thead>
           <tr>
