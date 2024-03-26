@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
+import moment from "moment";
 
 const ExpenseHistory = () => {
   const [allExpense, setAllExpense] = useState([]);
@@ -12,59 +13,84 @@ const ExpenseHistory = () => {
         setAllExpense(data);
       });
   }, [mirpurBranch]);
+  // console.log(allExpense);
 
-  console.log(allExpense);
+  const processedExpenseData = allExpense.map((entry) => {
+    const { _id, employeeName, givenDate, designation, branchName } = entry;
+    const items = [];
 
-  // let updateExpenseData = [...allExpense];
+    // Iterate over the properties of each object
+    for (const key in entry) {
+      // Check if the property is not a reserved property
+      if (
+        key !== "_id" &&
+        key !== "employeeName" &&
+        key !== "givenDate" &&
+        key !== "designation" &&
+        key !== "branchName" &&
+        key !== "createdAt"
+      ) {
+        // Destructure itemName and quantity
+        const { itemName, quantity } = entry[key]; // Assign values to itemName and quantity
+        // Push the ID, itemName, and quantity to the items array
+        items.push({ id: key, itemName, quantity });
+      }
+    }
 
-  // if (updateExpenseData.length > 0) {
-  //   const allKeys = updateExpenseData.reduce((keys, item) => {
-  //     Object.keys(item).forEach((key) => {
-  //       if (
-  //         key !== "_id" &&
-  //         key !== "branchName" &&
-  //         key !== "designation" &&
-  //         key !== "employeeName" &&
-  //         key !== "givenDate" &&
-  //         key !== "createdAt"
-  //       ) {
-  //         keys.add(key);
-  //       }
-  //     });
-  //     return keys;
-  //   }, new Set());
-  //   console.log(allKeys);
-  // }
-
-  const expense = [
-    {
-      _id: "6601148d8271438392ebc4c5",
-      employeeName: "Md. Shorif Hossain",
-      givenDate: "2024-03-25",
-      designation: "Admin",
-      branchName: "Mirpur",
-      "65f5495a22d4bc1c778d63cd": {
-        itemName: "Harpic",
-        quantity: "8",
-      },
-      "65f5492222d4bc1c778d09d4": {
-        itemName: "Marker",
-        quantity: "5",
-      },
-      "65f6696ece6fb222bdc9e0cf": {
-        itemName: "Pen",
-        quantity: "5",
-      },
-      "65f5485222d4bc1c778b9e63": {
-        itemName: "Tenis Ball",
-        quantity: "5",
-      },
-    },
-  ];
+    // Return whatever you want to be the new value of this element
+    return {
+      _id,
+      employeeName,
+      givenDate,
+      designation,
+      branchName,
+      items,
+    };
+  });
 
   return (
-    <div>
-      <p>Expense History</p>
+    <div className="mt-4 mr-3">
+      <h2 className="text-center font-bold text-xl mb-3">Employee Expense History</h2>
+      <table className="border-collapse w-full">
+        <thead>
+          <tr>
+            <th className="border border-slate-400">SL</th>
+            <th className="border border-slate-400">Employee Name</th>
+            <th className="border border-slate-400">Designation</th>
+            <th className="border border-slate-400">Given Date</th>
+            <th className="border border-slate-400">Item Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {processedExpenseData.map((expense, index) => (
+            <tr key={expense?._id} className="text-center w-full`">
+              <td className="border border-slate-400 p-2">{index + 1}</td>
+              <td className="border border-slate-400">
+                {expense?.employeeName}
+              </td>
+              <td className="border border-slate-400">
+                {expense?.designation}
+              </td>
+              <td className="border border-slate-400">
+                {moment(expense?.givenDate, "YYYY-MM-DD").format("DD-MM-YYYY")}
+              </td>
+
+              <td className="border border-slate-400">
+                {expense.items.map((item, index) => (
+                  <tr className=" text-left my-2" key={index}>
+                    <td className=" w-4/12">
+                      <ul className="list-disc pl-10">
+                        <li>{item?.itemName} =</li>
+                      </ul>
+                    </td>
+                    <td className=" w-1/6">{item?.quantity}</td>
+                  </tr>
+                ))}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
