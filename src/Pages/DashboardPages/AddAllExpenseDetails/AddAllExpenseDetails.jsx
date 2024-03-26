@@ -112,6 +112,13 @@ const AddAllExpenseDetails = () => {
 
   return (
     <div className="card w-full max-w-2xl mx-auto shadow-2xl bg-base-100 mb-12">
+      <h2 className="text-center font-bold text-lg underline my-3">
+        {" "}
+        {location.pathname ===
+        `/dashboard/addAllExpense/backItem/${employeeExpenseDetails?._id}`
+          ? "Item Return Information by the Employee"
+          : "Item Delivery Information to the Employee"}
+      </h2>
       <form
         onSubmit={handleSubmit((data) => onSubmit(data, actionType))}
         className="card-body"

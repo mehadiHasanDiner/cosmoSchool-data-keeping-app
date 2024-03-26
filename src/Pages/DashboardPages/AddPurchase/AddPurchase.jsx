@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import PurchaseRow from "./PurchaseRow";
+import Swal from "sweetalert2";
 
 const AddPurchase = () => {
   const { mirpurBranch } = useAuth();
@@ -15,16 +16,49 @@ const AddPurchase = () => {
     },
   });
 
+  const handlePurchaseRowDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${import.meta.env.VITE_URL_KEY}/addItem/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your product item has been deleted.",
+                icon: "success",
+              });
+            }
+            refetch();
+          });
+      }
+    });
+  };
+
   return (
-    <div className="overflow-x-auto">
-      <table className="table table-zebra">
+    <div className="overflow-x-auto mx-3">
+      <h2 className="text-center font-bold text-lg my-3 underline">
+        Add Purchase Information
+      </h2>
+      <table className="table table-zebra border-collapse">
         {/* head */}
         <thead>
           <tr>
-            <th>SL</th>
-            <th>Item Name</th>
-            <th>Item Category</th>
-            <th>Action</th>
+            <th className="border border-slate-400 text-center">SL</th>
+            <th className="border border-slate-400">Item Name</th>
+            <th className="border border-slate-400">Item Category</th>
+            <th className="border border-slate-400">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -33,6 +67,7 @@ const AddPurchase = () => {
               key={item?._id}
               item={item}
               index={index}
+              handlePurchaseRowDelete={handlePurchaseRowDelete}
             ></PurchaseRow>
           ))}
         </tbody>

@@ -51,8 +51,8 @@ const AddPurchaseDetails = () => {
   };
   return (
     <div>
-      <h2 className="text-center text-2xl my-3 font-bold">
-        {/* Service Name: {title} */}
+      <h2 className="text-center text-lg my-3 font-bold underline">
+        Add Item Purchase Information
       </h2>
       <div>
         <div className="card w-full max-w-2xl mx-auto shadow-2xl bg-base-100 mb-12">

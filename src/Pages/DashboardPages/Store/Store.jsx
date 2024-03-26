@@ -11,28 +11,32 @@ const Store = () => {
         store summary
       </p>
 
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
+      <div className="overflow-x-auto mr-3">
+        <table className="table table-zebra border-collapse">
           {/* head */}
-          <thead>
+          <thead className="text-black bg-gray-300">
             <tr className="text-center">
-              <th>SL</th>
-              <th>Item Name</th>
-              <th>Category</th>
+              <th className="border border-slate-400">SL</th>
+              <th className="border border-slate-400">Item Name</th>
+              <th className="border border-slate-400">Category</th>
               {/* <th>Price</th> */}
-              <th>Present Quantity</th>
-              <th>Last Purchase Date</th>
+              <th className="border border-slate-400">Present Quantity</th>
+              <th className="border border-slate-400">Last Purchase Date</th>
             </tr>
           </thead>
           <tbody>
             {storeItems.map((item, index) => (
               <tr className="text-center" key={index}>
-                <th>{index + 1}</th>
-                <td>{item?.itemName}</td>
-                <td>{item?.itemCategory}</td>
+                <th className="border border-slate-400">{index + 1}</th>
+                <td className="border border-slate-400">{item?.itemName}</td>
+                <td className="border border-slate-400">
+                  {item?.itemCategory}
+                </td>
                 {/* <td>Tk.{item?.itemPrice}</td> */}
-                <td>{item?.itemQuantity}</td>
-                <td>
+                <td className="border border-slate-400">
+                  {item?.itemQuantity}
+                </td>
+                <td className="border border-slate-400">
                   {moment(item?.purchaseDate, "YYYY-MM-DD").format(
                     "DD-MM-YYYY"
                   )}
