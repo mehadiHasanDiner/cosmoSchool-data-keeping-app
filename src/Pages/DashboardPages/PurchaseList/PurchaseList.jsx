@@ -3,12 +3,15 @@ import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import PurchaseListRow from "./PurchaseListRow";
 import { IoSearchSharp } from "react-icons/io5";
+import Swal from "sweetalert2";
 
 const PurchaseList = () => {
   const { mirpurBranch } = useAuth();
   const [purchaseItems, setPurchaseItems] = useState([]);
   const [searchByText, setSearchByText] = useState("");
   const [searchByDate, setSearchByDate] = useState("");
+  const [editInModal, setEditInModal] = useState([]);
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_URL_KEY}/purchase/${mirpurBranch}`)
@@ -17,20 +20,57 @@ const PurchaseList = () => {
         setPurchaseItems(data);
         // console.log(data);
       });
-  }, [mirpurBranch]);
+  }, [mirpurBranch, load]);
+
+  const handleDeleteItem = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${import.meta.env.VITE_URL_KEY}/purchase/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "The selected product item deleted successfully.",
+                icon: "success",
+              });
+            }
+            setLoad(!load);
+          });
+      }
+    });
+  };
+  const handleEditItem = (item) => {
+    setEditInModal(item);
+  };
+
+  console.log(editInModal);
+
+  const handleSubmitItemDetails = () => {};
 
   const handleSearchByText = () => {
+    const url = `${
+      import.meta.env.VITE_URL_KEY
+    }/purchasedItem/${mirpurBranch}/${searchByText}`;
     // console.log(searchByText);
-    fetch(
-      `${
-        import.meta.env.VITE_URL_KEY
-      }/purchasedItem/${mirpurBranch}/${searchByText}`
-    )
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setPurchaseItems(data);
       });
   };
+
   const handleSearchByDate = () => {
     const url = `${
       import.meta.env.VITE_URL_KEY
@@ -99,6 +139,7 @@ const PurchaseList = () => {
               <th>Total Price</th>
               <th>Voucher No.</th>
               <th>Remarks</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -108,10 +149,44 @@ const PurchaseList = () => {
                 key={item?._id}
                 item={item}
                 index={index}
+                handleDeleteItem={handleDeleteItem}
+                handleEditItem={handleEditItem}
               ></PurchaseListRow>
             ))}
           </tbody>
         </table>
+      </div>
+      <input type="checkbox" id="my_modal_6" className="modal-toggle" />
+      <div className="modal" role="dialog">
+        <div className="modal-box w-11/12 max-w-5xl">
+          <h3 className="font-bold text-lg">
+            Item Name: {editInModal.itemName}
+          </h3>
+
+          <div>
+            <form onSubmit={handleSubmitItemDetails} className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="number"
+                  name="name"
+                  className="input input-bordered"
+                  defaultValue={editInModal.itemPrice}
+                />
+              </div>
+            </form>
+          </div>
+
+          <p className="py-4">This modal works with a hidden checkbox!</p>
+
+          <div className="modal-action">
+            <label htmlFor="my_modal_6" className="btn">
+              Close!
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   );

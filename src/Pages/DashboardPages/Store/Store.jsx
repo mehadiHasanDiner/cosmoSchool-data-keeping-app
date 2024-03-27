@@ -1,15 +1,49 @@
 import moment from "moment";
 import useStore from "../../../hooks/useStore";
+import { useEffect, useState } from "react";
+import { IoSearchSharp } from "react-icons/io5";
+import useAuth from "../../../hooks/useAuth";
 
 const Store = () => {
   const [, storeItems] = useStore();
-  console.log(storeItems);
+  const { mirpurBranch } = useAuth();
+  const [searchByText, setSearchByText] = useState("");
+  const [storeAllItems, setStoreAllItems] = useState(storeItems);
+  // console.log(storeAllItems);
+
+  useEffect(() => {
+    setStoreAllItems(storeItems);
+  }, [storeItems, searchByText]);
+
+  const handleSearchByText = () => {
+    const url = `${
+      import.meta.env.VITE_URL_KEY
+    }/storeItemByName/${mirpurBranch}/${searchByText}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setStoreAllItems(data);
+      });
+  };
 
   return (
     <div>
       <p className="text-center font-bold text-xl my-3 capitalize">
         store summary
       </p>
+
+      <div className="mt-3 text-right  mr-3 my-3">
+        <input
+          className="input input-bordered input-base  w-full max-w-xs"
+          type="text"
+          placeholder="search by item name"
+          onChange={(e) => setSearchByText(e.target.value)}
+        />
+        <button onClick={handleSearchByText} className="btn btn-neutral ml-1">
+          <IoSearchSharp size={18} />
+        </button>
+      </div>
 
       <div className="overflow-x-auto mr-3">
         <table className="table table-zebra border-collapse">
@@ -25,7 +59,7 @@ const Store = () => {
             </tr>
           </thead>
           <tbody>
-            {storeItems.map((item, index) => (
+            {storeAllItems.map((item, index) => (
               <tr className="text-center" key={index}>
                 <th className="border border-slate-400">{index + 1}</th>
                 <td className="border border-slate-400">{item?.itemName}</td>

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import moment from "moment";
+import { IoSearchSharp } from "react-icons/io5";
 
 const ProductReturn = () => {
   const [returnItems, setReturnItems] = useState([]);
+  const [searchByText, setSearchByText] = useState("");
   const { mirpurBranch } = useAuth();
 
   useEffect(() => {
@@ -14,6 +16,18 @@ const ProductReturn = () => {
       });
   }, [mirpurBranch]);
   // console.log(allExpense);
+
+  const handleSearchByText = () => {
+    const url = `${
+      import.meta.env.VITE_URL_KEY
+    }/employeeReturnByName/${mirpurBranch}/${searchByText}`;
+    // console.log(searchByText);
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setReturnItems(data);
+      });
+  };
 
   const processedReturnItems = returnItems.map((entry) => {
     const { _id, employeeName, givenDate, designation, branchName } = entry;
@@ -53,6 +67,17 @@ const ProductReturn = () => {
       <h2 className="text-center font-bold text-xl mb-3">
         Employee Item Return History
       </h2>
+      <div className="mt-3 text-right  mr-3 my-3">
+        <input
+          className="input input-bordered input-base  w-full max-w-xs"
+          type="text"
+          placeholder="search by employee name"
+          onChange={(e) => setSearchByText(e.target.value)}
+        />
+        <button onClick={handleSearchByText} className="btn btn-neutral ml-1">
+          <IoSearchSharp size={18} />
+        </button>
+      </div>
       <table className="border-collapse w-full">
         <thead>
           <tr>
@@ -79,14 +104,11 @@ const ProductReturn = () => {
 
               <td className="border border-slate-400">
                 {expense.items.map((item, index) => (
-                  <tr className=" text-left my-2" key={index}>
-                    <td className=" w-4/12">
-                      <ul className="list-disc pl-10">
-                        <li>{item?.itemName} =</li>
-                      </ul>
-                    </td>
-                    <td className=" w-1/6">{item?.quantity}</td>
-                  </tr>
+                  <ul className=" list-disc text-left pl-10 flex" key={index}>
+                    <li className="mr-1">{item?.itemName} = </li>
+
+                    <span className="">{item?.quantity}</span>
+                  </ul>
                 ))}
               </td>
             </tr>
