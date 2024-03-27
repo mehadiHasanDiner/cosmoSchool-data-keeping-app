@@ -31,7 +31,7 @@ const PurchaseListRow = ({ item, index, handleDeleteItem, handleEditItem }) => {
       <td className="flex">
         <label
           onClick={() => handleEditItem(item)}
-          htmlFor="my_modal_6"
+          htmlFor="my_modal_7"
           className="btn btn-success btn-sm mr-2"
         >
           <FaRegEdit color="white" size={20} />

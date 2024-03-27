@@ -37,7 +37,7 @@ const Store = () => {
         <input
           className="input input-bordered input-base  w-full max-w-xs"
           type="text"
-          placeholder="search by item name"
+          placeholder="search by item name or category"
           onChange={(e) => setSearchByText(e.target.value)}
         />
         <button onClick={handleSearchByText} className="btn btn-neutral ml-1">
@@ -61,16 +61,51 @@ const Store = () => {
           <tbody>
             {storeAllItems.map((item, index) => (
               <tr className="text-center" key={index}>
-                <th className="border border-slate-400">{index + 1}</th>
-                <td className="border border-slate-400">{item?.itemName}</td>
-                <td className="border border-slate-400">
+                <th
+                  className={
+                    item?.itemQuantity === 0
+                      ? "border border-slate-400 bg-red-600 text-white"
+                      : "border border-slate-400"
+                  }
+                >
+                  {index + 1}
+                </th>
+
+                <td
+                  className={
+                    item?.itemQuantity === 0
+                      ? "border border-slate-400 bg-red-600 text-white"
+                      : "border border-slate-400"
+                  }
+                >
+                  {item?.itemName}
+                </td>
+                <td
+                  className={
+                    item?.itemQuantity === 0
+                      ? "border border-slate-400 bg-red-600 text-white"
+                      : "border border-slate-400"
+                  }
+                >
                   {item?.itemCategory}
                 </td>
                 {/* <td>Tk.{item?.itemPrice}</td> */}
-                <td className="border border-slate-400">
+                <td
+                  className={
+                    item?.itemQuantity === 0
+                      ? "border border-slate-400 bg-red-600 text-white"
+                      : "border border-slate-400"
+                  }
+                >
                   {item?.itemQuantity}
                 </td>
-                <td className="border border-slate-400">
+                <td
+                  className={
+                    item?.itemQuantity === 0
+                      ? "border border-slate-400 bg-red-600 text-white"
+                      : "border border-slate-400"
+                  }
+                >
                   {moment(item?.purchaseDate, "YYYY-MM-DD").format(
                     "DD-MM-YYYY"
                   )}

@@ -28,11 +28,11 @@ const AddAllExpenseDetails = () => {
       ...prevState,
       [itemId]: {
         itemName: itemName,
-        quantity: (prevState[itemId]?.quantity || 0) + quantity,
+        quantity: quantity,
       },
     }));
   };
-  // console.log(selectedItems);
+  console.log(selectedItems);
   // console.log(Object.entries(selectedItems));
 
   const onSubmit = async (data, actionType) => {

@@ -71,7 +71,7 @@ const ExpenseHistory = () => {
         <input
           className="input input-bordered input-base  w-full max-w-xs"
           type="text"
-          placeholder="search by employee name"
+          placeholder="search by employee name/designation"
           onChange={(e) => setSearchByText(e.target.value)}
         />
         <button onClick={handleSearchByText} className="btn btn-neutral ml-1">

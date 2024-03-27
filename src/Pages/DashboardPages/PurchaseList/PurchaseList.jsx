@@ -4,6 +4,9 @@ import useAuth from "../../../hooks/useAuth";
 import PurchaseListRow from "./PurchaseListRow";
 import { IoSearchSharp } from "react-icons/io5";
 import Swal from "sweetalert2";
+import UpdatePurchaseItem from "./UpdatePurchaseItem";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PurchaseList = () => {
   const { mirpurBranch } = useAuth();
@@ -55,10 +58,6 @@ const PurchaseList = () => {
     setEditInModal(item);
   };
 
-  console.log(editInModal);
-
-  const handleSubmitItemDetails = () => {};
-
   const handleSearchByText = () => {
     const url = `${
       import.meta.env.VITE_URL_KEY
@@ -83,6 +82,11 @@ const PurchaseList = () => {
       });
   };
 
+  const notify = () =>
+    toast.success("Product Item updated successfully", {
+      theme: "colored",
+    });
+
   const calculateTotalPrice = (item) => {
     return item.map((itemsArray) => {
       const totalPrice = itemsArray.itemPrice * itemsArray.itemQuantity;
@@ -104,7 +108,7 @@ const PurchaseList = () => {
           <input
             className="input input-bordered input-base  w-full max-w-xs"
             type="text"
-            placeholder="search by item name"
+            placeholder="search by name/category"
             onChange={(e) => setSearchByText(e.target.value)}
           />
           <button onClick={handleSearchByText} className="btn btn-neutral ml-1">
@@ -156,38 +160,23 @@ const PurchaseList = () => {
           </tbody>
         </table>
       </div>
-      <input type="checkbox" id="my_modal_6" className="modal-toggle" />
-      <div className="modal" role="dialog">
-        <div className="modal-box w-11/12 max-w-5xl">
-          <h3 className="font-bold text-lg">
-            Item Name: {editInModal.itemName}
-          </h3>
 
-          <div>
-            <form onSubmit={handleSubmitItemDetails} className="card-body">
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Name</span>
-                </label>
-                <input
-                  type="number"
-                  name="name"
-                  className="input input-bordered"
-                  defaultValue={editInModal.itemPrice}
-                />
-              </div>
-            </form>
-          </div>
-
-          <p className="py-4">This modal works with a hidden checkbox!</p>
-
-          <div className="modal-action">
-            <label htmlFor="my_modal_6" className="btn">
-              Close!
-            </label>
-          </div>
+      <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+      <div className={"modal"} role="dialog">
+        <div className="modal-box">
+          <UpdatePurchaseItem
+            load={load}
+            setLoad={setLoad}
+            editInModal={editInModal}
+            notify={notify}
+          ></UpdatePurchaseItem>
         </div>
+        <label className="modal-backdrop" htmlFor="my_modal_7">
+          Close
+        </label>
       </div>
+
+      <ToastContainer />
     </div>
   );
 };
