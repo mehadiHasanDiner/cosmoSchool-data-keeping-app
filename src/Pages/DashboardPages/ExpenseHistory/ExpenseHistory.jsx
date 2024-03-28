@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import moment from "moment";
 import { IoSearchSharp } from "react-icons/io5";
+import { Helmet } from "react-helmet-async";
 
 const ExpenseHistory = () => {
   const [allExpense, setAllExpense] = useState([]);
@@ -64,6 +65,9 @@ const ExpenseHistory = () => {
 
   return (
     <div className="mt-4 mr-3">
+      <Helmet>
+        <title>Item Distribution Summary | Cosmo School </title>
+      </Helmet>
       <h2 className="text-center font-bold text-xl mb-3">
         Employee Expense History
       </h2>

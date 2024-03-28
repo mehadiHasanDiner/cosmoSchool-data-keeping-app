@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import moment from "moment";
 import { IoSearchSharp } from "react-icons/io5";
+import { Helmet } from "react-helmet-async";
 
 const ProductReturn = () => {
   const [returnItems, setReturnItems] = useState([]);
@@ -64,6 +65,9 @@ const ProductReturn = () => {
 
   return (
     <div className="mt-4 mr-3">
+      <Helmet>
+        <title>Item Return Summary | Cosmo School </title>
+      </Helmet>
       <h2 className="text-center font-bold text-xl mb-3">
         Employee Item Return History
       </h2>

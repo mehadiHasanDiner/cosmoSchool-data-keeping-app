@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import PurchaseRow from "./PurchaseRow";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AddPurchase = () => {
   const { mirpurBranch } = useAuth();
@@ -48,6 +49,9 @@ const AddPurchase = () => {
 
   return (
     <div className="overflow-x-auto mx-3">
+      <Helmet>
+        <title>Purchase | Cosmo School </title>
+      </Helmet>
       <h2 className="text-center font-bold text-lg my-3 underline">
         Add Purchase Information
       </h2>

@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 const AddPurchaseDetails = () => {
   const purchaseDetails = useLoaderData();
   const { itemName, itemCategory, branchName } = purchaseDetails;
@@ -51,6 +52,9 @@ const AddPurchaseDetails = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Purchase Details | Cosmo School </title>
+      </Helmet>
       <h2 className="text-center text-lg my-3 font-bold underline">
         Add Item Purchase Information
       </h2>

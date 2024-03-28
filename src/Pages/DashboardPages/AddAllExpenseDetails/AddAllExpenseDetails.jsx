@@ -4,6 +4,7 @@ import { useLoaderData, useLocation } from "react-router-dom";
 import useStore from "../../../hooks/useStore";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AddAllExpenseDetails = () => {
   const employeeExpenseDetails = useLoaderData();
@@ -112,12 +113,15 @@ const AddAllExpenseDetails = () => {
 
   return (
     <div className="card w-full max-w-2xl mx-auto shadow-2xl bg-base-100 mb-12">
+      <Helmet>
+        <title>Item Distribution & Return info | Cosmo School </title>
+      </Helmet>
       <h2 className="text-center font-bold text-lg underline my-3">
         {" "}
         {location.pathname ===
         `/dashboard/addAllExpense/backItem/${employeeExpenseDetails?._id}`
           ? "Item Return Information by the Employee"
-          : "Item Delivery Information to the Employee"}
+          : "Item Distribution Information to the Employee"}
       </h2>
       <form
         onSubmit={handleSubmit((data) => onSubmit(data, actionType))}

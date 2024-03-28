@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import UpdatePurchaseItem from "./UpdatePurchaseItem";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet-async";
 
 const PurchaseList = () => {
   const { mirpurBranch } = useAuth();
@@ -99,6 +100,9 @@ const PurchaseList = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>All Purchased Data | Cosmo School </title>
+      </Helmet>
       <p className="text-center font-bold text-xl my-3 underline">
         All Purchased Information
       </p>

@@ -3,6 +3,7 @@ import useStore from "../../../hooks/useStore";
 import { useEffect, useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import useAuth from "../../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const Store = () => {
   const [, storeItems] = useStore();
@@ -29,6 +30,9 @@ const Store = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Store Balance | Cosmo School </title>
+      </Helmet>
       <p className="text-center font-bold text-xl my-3 capitalize">
         store summary
       </p>

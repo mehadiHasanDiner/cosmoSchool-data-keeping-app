@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import AllExpenseRow from "./AllExpenseRow";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const AddAllExpense = () => {
   const { mirpurBranch } = useAuth();
@@ -48,8 +49,11 @@ const AddAllExpense = () => {
 
   return (
     <div className="overflow-x-auto">
+      <Helmet>
+        <title>Add Item Distribution info | Cosmo School </title>
+      </Helmet>
       <h2 className="my-3 text-center font-bold text-lg underline capitalize">
-        Item delivery information to the employee
+        Item distribution information to the employee
       </h2>
       <table className="table table-zebra border-collapse">
         {/* head */}
