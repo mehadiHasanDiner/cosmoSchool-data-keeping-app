@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/050805da-750b-4a3c-b2b1-4cc76b1d1c53/deploy-status)](https://app.netlify.com/sites/cosmoschool-store/deploys)
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
