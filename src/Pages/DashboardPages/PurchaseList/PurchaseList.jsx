@@ -134,7 +134,7 @@ const PurchaseList = () => {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="table table-zebra">
+        <table className="table ">
           {/* head */}
           <thead>
             <tr>

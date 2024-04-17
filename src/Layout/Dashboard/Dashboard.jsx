@@ -10,12 +10,14 @@ import { MdOutlineListAlt } from "react-icons/md";
 import { FaShop } from "react-icons/fa6";
 import { FaBalanceScale } from "react-icons/fa";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { ThemeContext } from "../../Providers/ThemeProvider";
 
 const Dashboard = () => {
   const [minusIcon1, setMinusIcon1] = useState(true);
   const [minusIcon2, setMinusIcon2] = useState(true);
+  const { darkMode } = useContext(ThemeContext);
   const handlePurchaseIcon = () => {
     setMinusIcon1(!minusIcon1);
   };
@@ -24,7 +26,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className={`${darkMode ? "bg-gray-800 text-gray-300" : ""}`}>
       <Helmet>
         <title>Dashboard | Cosmo School </title>
       </Helmet>
@@ -39,9 +41,9 @@ const Dashboard = () => {
 
             <label
               htmlFor="my-drawer-2"
-              className="absolute z-30 -top-14 ml-2 left-0 drawer-button lg:hidden btn btn-outline"
+              className="absolute z-30 -top-14 ml-2 left-0 drawer-button lg:hidden btn btn-outline bg-slate-200"
             >
-              <IoMdMenu size={26} />
+              <IoMdMenu size={26}  />
             </label>
           </div>
 

@@ -36,8 +36,8 @@ const AddItem = () => {
   };
   
   return (
-    <div className="bg-gradient-to-b from-gray-300 to-gray-200 rounded-lg p-2 my-6 mr-3">
-      <h2 className="font-bold text-2xl my-4 text-center">Add a New Item</h2>
+    <div className="bg-gradient-to-b from-gray-300 to-gray-200 rounded-lg p-2 my-6 mr-3 text-black">
+      <h2 className="font-bold text-2xl my-4 text-center ">Add a New Item</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="md:flex md:flex-row space-x-4 items-center flex-col w-full justify-around">
           <div className="flex">

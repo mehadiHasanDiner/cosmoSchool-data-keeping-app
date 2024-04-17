@@ -112,7 +112,7 @@ const AddAllExpenseDetails = () => {
   };
 
   return (
-    <div className="card w-full max-w-2xl mx-auto shadow-2xl bg-base-100 mb-12">
+    <div className="card w-full max-w-2xl mx-auto shadow-2xl bg-base-200 mb-12 mt-8 text-black">
       <Helmet>
         <title>Item Distribution & Return info | Cosmo School </title>
       </Helmet>

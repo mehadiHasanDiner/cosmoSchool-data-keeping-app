@@ -55,7 +55,7 @@ const AddAllExpense = () => {
       <h2 className="my-3 text-center font-bold text-lg underline capitalize">
         Item distribution information to the employee
       </h2>
-      <table className="table table-zebra border-collapse">
+      <table className="table  border-collapse">
         {/* head */}
         <thead>
           <tr className="text-center">

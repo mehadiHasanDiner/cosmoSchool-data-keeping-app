@@ -55,7 +55,7 @@ const AddPurchase = () => {
       <h2 className="text-center font-bold text-lg my-3 underline">
         Add Purchase Information
       </h2>
-      <table className="table table-zebra border-collapse">
+      <table className="table border-collapse">
         {/* head */}
         <thead>
           <tr>

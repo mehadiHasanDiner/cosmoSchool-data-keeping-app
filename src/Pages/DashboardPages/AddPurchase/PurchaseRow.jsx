@@ -17,7 +17,7 @@ const PurchaseRow = ({ item, handlePurchaseRowDelete, index }) => {
           <MdDelete size={18} /> Delete
         </button>
         <Link to={`${_id}`}>
-          <button className="btn btn-sm btn-outline btn-neutral">
+          <button className="btn btn-sm btn-outline  bg-slate-100">
             <MdAddChart size={18} /> Add Details
           </button>
         </Link>

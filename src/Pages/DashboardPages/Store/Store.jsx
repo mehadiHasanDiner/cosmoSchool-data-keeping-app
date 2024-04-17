@@ -50,7 +50,7 @@ const Store = () => {
       </div>
 
       <div className="overflow-x-auto mr-3">
-        <table className="table table-zebra border-collapse">
+        <table className="table border-collapse">
           {/* head */}
           <thead className="text-black bg-gray-300">
             <tr className="text-center">

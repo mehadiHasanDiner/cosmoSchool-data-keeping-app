@@ -23,13 +23,13 @@ const AllExpenseRow = ({ expense, index, handleEmployeeDelete }) => {
           Delete
         </button>
         <Link to={`${_id}`}>
-          <button className="btn btn-sm btn-outline btn-neutral">
+          <button className="btn btn-sm  btn-neutral btn-outline bg-slate-100">
             <BsFillFastForwardBtnFill size={18} />
             Give Item
           </button>
         </Link>
         <Link to={`backItem/${_id}`}>
-          <button className="btn btn-sm btn-outline btn-neutral">
+          <button className="btn btn-sm btn-outline bg-slate-100">
             <BsFillSkipBackwardBtnFill size={18} />
             Item Back
           </button>

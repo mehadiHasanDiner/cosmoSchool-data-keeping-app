@@ -58,7 +58,7 @@ const AddPurchaseDetails = () => {
       <h2 className="text-center text-lg my-3 font-bold underline">
         Add Item Purchase Information
       </h2>
-      <div>
+      <div className="text-black">
         <div className="card w-full max-w-2xl mx-auto shadow-2xl bg-base-100 mb-12">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

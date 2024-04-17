@@ -36,8 +36,8 @@ const AddEmployee = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-gray-300 to-gray-200 rounded-lg p-2 my-6 mr-3">
-      <h2 className="font-bold text-2xl my-4 text-center">
+    <div className="bg-gradient-to-b from-gray-300 to-gray-200 rounded-lg p-2 my-6 mr-3 text-black">
+      <h2 className="font-bold text-2xl my-4 text-center ">
         Add a New Employee
       </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
